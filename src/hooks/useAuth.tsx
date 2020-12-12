@@ -31,11 +31,14 @@ const useProvideAuth = () => {
 
   const handleUser = async (authUser: AuthUser | null): Promise<void> => {
     if (authUser) {
-      let { exists, ...userData } = await getDocument(`users/${authUser.uid}`);
+      let { exists, hasPendingWrites, __snapshot, ...userData } = await getDocument(
+        `users/${authUser.uid}`
+      );
 
       if (!exists) {
         const newUser = formatUser(authUser);
-        userData = await createUser(newUser);
+        await createUser(authUser.uid, newUser);
+        userData = { id: userData.id as string, ...newUser };
       }
       setUser(userData as User);
     } else {

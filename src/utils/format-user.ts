@@ -2,11 +2,10 @@ import { User as AuthUser } from '@firebase/auth-types';
 
 import { User } from '@data-types/user.type';
 
-export const formatUser = ({ uid, email, displayName, photoURL, providerData }: AuthUser): User => {
+export const formatUser = ({ email, displayName, photoURL, providerData }: AuthUser): User => {
   const formatedDisplayName = displayName || (email?.split('@')[0] as string);
 
   return {
-    id: uid,
     email: email as string,
     photoURL,
     displayName: formatedDisplayName,

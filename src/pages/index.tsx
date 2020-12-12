@@ -18,7 +18,7 @@ const Home: NextPage<HomeProps> = () => {
 
   return (
     <main>
-      <h1 className="text-5xl text-center mb-10">Welcome to budget keeper</h1>
+      <h1 className="text-5xl text-center mb-10">Welcome !</h1>
       <SignUp />
       <SignIn />
       <SignInWithGoogle />
