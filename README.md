@@ -7,6 +7,7 @@ A template to start a new project using Next.js with Firebase auth
 ## Install
 
 - Clone with the following command `npx degit git@github.com:ThomasLeveque/next.js-firebase-auth-template.git <folder-name>`
+- Rename `.env.exemple` by `.env.local` and paste your firebase config
 - Run `yarn` command to install all the dependencies
 
 ## Launch
