@@ -1,5 +1,4 @@
 export type User = {
-  id?: string;
   email: string;
   photoURL: string | null;
   provider?: string;

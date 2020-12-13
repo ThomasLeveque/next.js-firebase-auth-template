@@ -1,6 +1,6 @@
 import { createContext, useContext, memo, useEffect, useState } from 'react';
 import { User as AuthUser } from '@firebase/auth-types';
-import { getDocument } from '@nandorojo/swr-firestore';
+import { getDocument, Document } from '@nandorojo/swr-firestore';
 
 import { createUser } from '@libs/db';
 import { fuego } from '@libs/fuego';
@@ -8,7 +8,7 @@ import { User } from '@data-types/user.type';
 import { formatUser } from '@utils/format-user';
 
 type AuthContextType = {
-  user: User | null;
+  user: Document<User> | null;
   userLoaded: boolean;
 };
 
@@ -26,21 +26,19 @@ export const useAuth = (): AuthContextType => {
 };
 
 const useProvideAuth = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<Document<User> | null>(null);
   const [userLoaded, setUserLoaded] = useState(false);
 
   const handleUser = async (authUser: AuthUser | null): Promise<void> => {
     if (authUser) {
-      let { exists, hasPendingWrites, __snapshot, ...userData } = await getDocument(
-        `users/${authUser.uid}`
-      );
+      let userData = await getDocument<Document<User>>(`users/${authUser.uid}`);
 
-      if (!exists) {
+      if (!userData.exists) {
         const newUser = formatUser(authUser);
         await createUser(authUser.uid, newUser);
-        userData = { id: userData.id as string, ...newUser };
+        userData = await getDocument<Document<User>>(`users/${authUser.uid}`);
       }
-      setUser(userData as User);
+      setUser(userData);
     } else {
       setUser(null);
     }
