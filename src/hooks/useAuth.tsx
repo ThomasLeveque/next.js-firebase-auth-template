@@ -5,7 +5,6 @@ import { getDocument, Document } from '@nandorojo/swr-firestore';
 import { createUser } from '@libs/db';
 import { fuego } from '@libs/fuego';
 import { User } from '@data-types/user.type';
-import { formatUser } from '@utils/format-user';
 
 type AuthContextType = {
   user: Document<User> | null;
@@ -34,8 +33,7 @@ const useProvideAuth = () => {
       let userData = await getDocument<Document<User>>(`users/${authUser.uid}`);
 
       if (!userData.exists) {
-        const newUser = formatUser(authUser);
-        await createUser(authUser.uid, newUser);
+        await createUser(authUser.uid, authUser);
         userData = await getDocument<Document<User>>(`users/${authUser.uid}`);
       }
       setUser(userData);

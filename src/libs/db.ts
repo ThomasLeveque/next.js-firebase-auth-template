@@ -1,7 +1,10 @@
-import { User } from '@data-types/user.type';
-import { fuego } from '@libs/fuego';
+import { User as AuthUser } from '@firebase/auth-types';
 
-export const createUser = async (userId: string, newUser: User): Promise<void> => {
+import { fuego } from '@libs/fuego';
+import { formatUser } from '@utils/format-user';
+
+export const createUser = async (userId: string, authUser: AuthUser): Promise<void> => {
   const userRef = fuego.db.collection('users').doc(userId);
+  const newUser = formatUser(authUser);
   return userRef.set(newUser);
 };
