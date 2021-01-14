@@ -1,10 +1,10 @@
 import React from 'react';
 import { createContext, useContext, memo, useEffect, useState } from 'react';
 import { User as AuthUser } from '@firebase/auth-types';
-import { getDocument, Document } from '@nandorojo/swr-firestore';
 
-import { createUser } from '@libs/db';
-import { fuego } from '@libs/fuego';
+import { createUser, getUser } from '@libs/db';
+import { auth } from '@libs/firebase';
+import { Document } from '@libs/types';
 import { User } from '@data-types/user.type';
 
 type AuthContextType = {
@@ -31,11 +31,11 @@ const useProvideAuth = () => {
 
   const handleUser = async (authUser: AuthUser | null): Promise<void> => {
     if (authUser) {
-      let userData = await getDocument<Document<User>>(`users/${authUser.uid}`);
+      let userData = await getUser(authUser.uid);
 
       if (!userData.exists) {
         await createUser(authUser.uid, authUser);
-        userData = await getDocument<Document<User>>(`users/${authUser.uid}`);
+        userData = await getUser(authUser.uid);
       }
       setUser(userData);
     } else {
@@ -45,7 +45,7 @@ const useProvideAuth = () => {
   };
 
   useEffect(() => {
-    const unsubscribe = fuego.auth().onAuthStateChanged(handleUser);
+    const unsubscribe = auth.onAuthStateChanged(handleUser);
 
     return () => unsubscribe();
   }, []);
