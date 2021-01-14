@@ -1,3 +1,4 @@
+import React from 'react';
 import { createContext, useContext, memo, useEffect, useState } from 'react';
 import { User as AuthUser } from '@firebase/auth-types';
 import { getDocument, Document } from '@nandorojo/swr-firestore';

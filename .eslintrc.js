@@ -20,5 +20,7 @@ module.exports = {
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
 
     'react/prop-types': 'off',
+    'jsx-a11y/anchor-is-valid': 'off',
+    'react/display-name': 'off',
   },
 }
