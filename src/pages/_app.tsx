@@ -1,8 +1,6 @@
 import React from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import 'firebase/firestore';
-import 'firebase/auth';
 
 import AuthProvider from '@hooks/useAuth';
 import AuthLoading from '@components/auth-loading';
