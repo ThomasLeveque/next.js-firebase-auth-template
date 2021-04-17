@@ -1,15 +1,14 @@
-import React from 'react';
 import { NextPage } from 'next';
+import React from 'react';
 
-import { useAuth } from '@hooks/useAuth';
 import Redirect from '@components/redirect';
-import SignUp from '@components/sign-up';
 import SignIn from '@components/sign-in';
 import SignInWithGoogle from '@components/sign-in-with-google';
+import SignUp from '@components/sign-up';
 
-type HomeProps = {};
+import { useAuth } from '@hooks/useAuth';
 
-const Home: NextPage<HomeProps> = () => {
+const Home: NextPage = () => {
   const { user } = useAuth();
 
   if (user) {

@@ -1,7 +1,9 @@
 import React from 'react';
 
 import Header from '@components/header';
+
 import { useAuth } from '@hooks/useAuth';
+
 import Redirect from './redirect';
 
 const Layout: React.FC = ({ children }) => {

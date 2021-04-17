@@ -1,10 +1,10 @@
-import React from 'react';
-import { createContext, useContext, memo, useEffect, useState } from 'react';
 import { User as AuthUser } from '@firebase/auth-types';
+import React, { createContext, useContext, memo, useEffect, useState } from 'react';
 
 import { createUser, getUser } from '@libs/db';
 import { auth } from '@libs/firebase';
 import { Document } from '@libs/types';
+
 import { User } from '@data-types/user.type';
 
 type AuthContextType = {

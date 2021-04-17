@@ -4,6 +4,12 @@ module.exports = {
   parserOptions: {
     ecmaFeatures: { jsx: true },
   },
+  env: {
+    node: true,
+    browser: true,
+    es6: true,
+    jest: true,
+  },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -23,4 +29,4 @@ module.exports = {
     'jsx-a11y/anchor-is-valid': 'off',
     'react/display-name': 'off',
   },
-}
+};

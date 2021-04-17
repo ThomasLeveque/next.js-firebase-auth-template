@@ -1,11 +1,9 @@
-import React from 'react';
 import { NextPage } from 'next';
+import React from 'react';
 
 import Layout from '@components/layout';
 
-type DashboardProps = {};
-
-const Dashboard: NextPage<DashboardProps> = () => {
+const Dashboard: NextPage = () => {
   return (
     <Layout>
       <h1 className="text-5xl">Dashboard</h1>

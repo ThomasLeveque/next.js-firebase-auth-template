@@ -1,9 +1,11 @@
-import { User } from '@data-types/user.type';
 import { User as AuthUser } from '@firebase/auth-types';
 import { DocumentSnapshot } from '@firebase/firestore-types';
 
 import { db } from '@libs/firebase';
 import { Document } from '@libs/types';
+
+import { User } from '@data-types/user.type';
+
 import { formatUser } from '@utils/format-user';
 
 const formatDoc = <Data>(doc: DocumentSnapshot): Document<Data> => ({

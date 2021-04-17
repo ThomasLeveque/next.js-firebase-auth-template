@@ -1,12 +1,11 @@
-import React from 'react';
 import { NextPage } from 'next';
+import React from 'react';
 
 import Layout from '@components/layout';
+
 import { useAuth } from '@hooks/useAuth';
 
-type AccountProps = {};
-
-const Account: NextPage<AccountProps> = () => {
+const Account: NextPage = () => {
   const { user } = useAuth();
 
   return (
