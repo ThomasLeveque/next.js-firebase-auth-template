@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 
-import { signInWithEmail } from '@libs/auth';
+import { useAuth } from '@hooks/useAuth';
 
 const SignIn: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const { signInWithEmail } = useAuth();
 
   const handleSignInWithEmail = async (): Promise<void> => {
     try {
@@ -13,6 +15,7 @@ const SignIn: React.FC = () => {
       await signInWithEmail(email, password);
       // Do not setLoading(false) because Signin will unmount this component.
     } catch (err) {
+      console.error(err);
       setLoading(false);
     }
   };
@@ -23,11 +26,13 @@ const SignIn: React.FC = () => {
       <input
         className="border-black border-2"
         value={email}
+        placeholder="Email"
         onChange={(event) => setEmail(event.target.value)}
       />
       <input
         className="border-black border-2"
         value={password}
+        placeholder="Password"
         type="password"
         onChange={(event) => setPassword(event.target.value)}
       />

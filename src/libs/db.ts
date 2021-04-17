@@ -4,7 +4,7 @@ import { DocumentSnapshot } from '@firebase/firestore-types';
 import { db } from '@libs/firebase';
 import { Document } from '@libs/types';
 
-import { User } from '@data-types/user.type';
+import { AdditionalUserData, User } from '@data-types/user.type';
 
 import { formatUser } from '@utils/format-user';
 
@@ -14,9 +14,13 @@ const formatDoc = <Data>(doc: DocumentSnapshot): Document<Data> => ({
   ...(doc.data() as Data),
 });
 
-export const createUser = async (userId: string, authUser: AuthUser): Promise<void> => {
+export const createUser = async (
+  userId: string,
+  authUser: AuthUser,
+  additionnalData?: AdditionalUserData
+): Promise<void> => {
   const userRef = db.collection('users').doc(userId);
-  const newUser = formatUser(authUser);
+  const newUser = formatUser(authUser, additionnalData);
   return userRef.set(newUser);
 };
 

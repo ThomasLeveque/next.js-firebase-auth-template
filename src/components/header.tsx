@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { signOut } from '@libs/auth';
+import { useAuth } from '@hooks/useAuth';
 
 const Header: React.FC = () => {
+  const { signOut } = useAuth();
+
   const handleSignOut = () => {
     signOut();
   };

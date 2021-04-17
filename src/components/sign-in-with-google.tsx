@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
-import { signInWithGoogle } from '@libs/auth';
+import { useAuth } from '@hooks/useAuth';
 
 const SignInWithGoogle: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
+
+  const { signInWithGoogle } = useAuth();
 
   const handleSignInWithGoogle = async (): Promise<void> => {
     try {
@@ -11,6 +13,7 @@ const SignInWithGoogle: React.FC = () => {
       await signInWithGoogle();
       // Do not setLoading(false) because Signin with google will unmount this component.
     } catch (err) {
+      console.error(err);
       setLoading(false);
     }
   };

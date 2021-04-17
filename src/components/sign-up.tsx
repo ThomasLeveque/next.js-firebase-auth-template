@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 
-import { signUpWithEmail } from '@libs/auth';
+import { useAuth } from '@hooks/useAuth';
 
 const SignUp: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [displayName, setDisplayName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const { signUpWithEmail } = useAuth();
 
   const handleSignUpWithEmail = async (): Promise<void> => {
     try {
       setLoading(true);
-      await signUpWithEmail(email, password);
+      await signUpWithEmail(email, password, { displayName });
       // Do not setLoading(false) because Signup will unmount this component.
     } catch (err) {
-      setLoading(true);
+      console.error(err);
+      setLoading(false);
     }
   };
 
@@ -22,12 +26,20 @@ const SignUp: React.FC = () => {
       <h2 className="text-3xl text-center mb-4">Sign up</h2>
       <input
         className="border-black border-2"
+        value={displayName}
+        placeholder="DisplayName"
+        onChange={(event) => setDisplayName(event.target.value)}
+      />
+      <input
+        className="border-black border-2"
         value={email}
+        placeholder="Email"
         onChange={(event) => setEmail(event.target.value)}
       />
       <input
         className="border-black border-2"
         value={password}
+        placeholder="Password"
         type="password"
         onChange={(event) => setPassword(event.target.value)}
       />

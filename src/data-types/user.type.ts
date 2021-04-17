@@ -1,9 +1,12 @@
-export type User = {
-  email: string;
+export interface User extends AdditionalUserData {
+  email: string | null;
   photoURL: string | null;
   provider?: string;
-  displayName: string;
   isAdmin: boolean;
   createdAt: number;
   updatedAt: number;
-};
+}
+
+export interface AdditionalUserData {
+  displayName: string | null;
+}
